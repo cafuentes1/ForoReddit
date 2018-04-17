@@ -4,23 +4,30 @@
     <title>Grupo 37</title>
   </head>
   <body>
-    <h1>Lista usuarios</h1>
+    <h1>Lista de Usuarios</h1>
+      <% flash.each do |key, value|%>
+        <div><%= value %></div>
+        <% end %>
     <table>
       <tr>
         <td>Nombre</td>
         <td>Email</td>
       </tr>
-      <% @usuarios.each do |usuario|%>
+      <% @usuarios.each do |usuario| %>
         <tr>
           <td><%= link_to usuario.nombre, usuario %></td>
           <td><%= usuario.email %></td>
-          <td><% link_to "Editar", edit_user_path(usuario) %></td>
-          <td><% link_to "Eliminar", usuario, method: :delete, confirm: "¿Estas Seguro?"%></td>
+          <td><%= link_to "Editar", edit_user_path(usuario) %></td>
+          <td><%= link_to "Eliminar", usuario, method: :delete, confirm: "¿Estas seguro?"%></td>
         </tr>
       <% end %>
-      <% if usuarios.size==0 %>
+      <% if @usuarios.size==0 %>
         USUARIOS NO ENCONTRADOS
-      <% end %>
+      <%end%>
     </table>
+
+    <%= link_to 'Nuevo usuario', new_user_path %>
+    <%= link_to 'Registrar', '/signup' %>
+
   </body>
 </html>
