@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @usuario=User.find(params[:id])
-    render action: "detalle"
+    render action: "show"
   end
 
   def detalle
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @usuario = User.new(user_params)
       if @usuario.save
         flash[:success]="Bienvenidos"
-        redirect_to users_url
+        redirect_to root_url
       else
         render action: 'new'
     end

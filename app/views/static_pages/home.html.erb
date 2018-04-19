@@ -1,0 +1,22 @@
+<h1>Grupo 37</h1>
+<p>
+  <h2>Inicio</h2>
+  <b>Integrantes:</b><br>
+  Carlos Fuentes, Victor Marambio, Jose Luco<br><br>
+
+  <b>Menu:</b><br><br>
+  <% if logged_in? %>
+
+    <b>Usuario Actual:</b><br>
+    <%= current_user[:nombre]%><br>
+    <%= current_user[:email]%><br><br>
+
+    <li><%= link_to "Lista de usuarios", users_url %></li>
+    <li><%= link_to "Perfil usuario", current_user %></li>
+    <li><%= link_to "Editar usuario", edit_user_path(current_user) %></li>
+    <li><%= link_to "Cerrar sesión", logout_path, method: :delete %></li>
+  <% else %>
+    <li><%= link_to "Iniciar sesión", login_path %></li>
+  <% end %>
+
+</p>
