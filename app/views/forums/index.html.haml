@@ -1,0 +1,7 @@
+- @forums.each do |forum|
+  %h2= forum.title
+  %p
+    Creado hace
+    = time_ago_in_words(forum.created_at)
+
+= link_to "Nuevo Foro", new_forum_path

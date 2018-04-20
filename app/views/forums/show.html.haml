@@ -1,0 +1,7 @@
+%h1= @forum.title
+%h2= @forum.topic
+%p= @forum.description
+
+= link_to "Editar", edit_forum_path(@forum)
+= link_to "Eliminar", forum_path(@forum), method: :delete, data: { confirm: "¿Estás seguro que quieres eliminar este foro?"}
+= link_to "Inicio", forums_path
