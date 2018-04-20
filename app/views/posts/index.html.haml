@@ -4,6 +4,11 @@
     Publicado hace
     = time_ago_in_words(post.created_at)
     por
-    = post.user.email
+    = post.user.name
 
-= link_to "Nuevo Post", new_post_path
+- if user_signed_in?
+  = link_to "Nuevo Post", new_post_path
+  = link_to "Cerrar Sesión", destroy_user_session_path, :method => :delete
+- else
+  = link_to "Iniciar Sesión", new_user_session_path
+  = link_to "Registrarse", new_user_registration_path
