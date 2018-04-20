@@ -1,0 +1,5 @@
+%h1 Editar Comentario
+
+= simple_form_for([@post, @comment]) do |f|
+  = f.input :comment, label: 'Comentario '
+  = f.submit

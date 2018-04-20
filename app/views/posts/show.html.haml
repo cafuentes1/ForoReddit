@@ -1,6 +1,14 @@
 %h1= @post.title
 %p= @post.content
 
+#comments
+  %h2= "Cantidad de comentarios:"
+  %h2= @post.comments.count
+  = render @post.comments
+
+  %h3 Comentar
+  = render "comments/form"
+
 = link_to "Editar", edit_post_path(@post)
 = link_to "Eliminar", post_path(@post) ,method: :delete, data: { confirm: "¿Estás seguro que quieres eliminar el post?"}
 = link_to "Inicio", root_path
