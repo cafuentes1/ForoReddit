@@ -3,5 +3,7 @@
   %p
     Publicado hace
     = time_ago_in_words(post.created_at)
+    por
+    = post.user.email
 
 = link_to "Nuevo Post", new_post_path
