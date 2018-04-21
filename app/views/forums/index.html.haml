@@ -1,3 +1,5 @@
+%h1 Foros - Grupo 37
+
 - @forums.each do |forum|
   %h2= link_to forum.title, forum
   %p
@@ -9,6 +11,8 @@
 - if user_signed_in?
   = link_to "Nuevo Foro", new_forum_path
   = link_to "Cerrar Sesión", destroy_user_session_path, :method => :delete
+  = link_to "Posts", posts_path
 - else
   = link_to "Iniciar Sesión", new_user_session_path
   = link_to "Registrarse", new_user_registration_path
+  = link_to "Posts", posts_path
