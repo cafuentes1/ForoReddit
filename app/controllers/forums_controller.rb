@@ -9,11 +9,11 @@ class ForumsController < ApplicationController
   end
 
   def new
-    @forum = Forum.new
+    @forum = current_user.forums.build
   end
 
   def create
-    @forum = Forum.new(forum_params)
+    @forum = current_user.forums.build(forum_params)
 
     if @forum.save
       redirect_to @forum
@@ -35,7 +35,7 @@ class ForumsController < ApplicationController
 
   def destroy
     @forum.destroy
-    redirect_to root_path
+    redirect_to forums_path
   end
 
   private
