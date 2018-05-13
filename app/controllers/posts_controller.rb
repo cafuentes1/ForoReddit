@@ -3,7 +3,13 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @posts = Post.all.order("created_at DESC")
+    @posts = Post.all
+    if params[:search]
+      @posts = Post.search(params[:search]).order("created_at DESC")
+    else
+      @posts = Post.all.order("created_at DESC")
+
+    end
   end
 
   def show
@@ -54,12 +60,14 @@ class PostsController < ApplicationController
 
   private
 
-  def find_post
-    @forum = Forum.find(params[:forum_id])
-    @post = @forum.posts.find(params[:id])
-  end
+    def find_post
+      @forum = Forum.find(params[:forum_id])
+      @post = @forum.posts.find(params[:id])
+    end
 
-  def post_params
-    params.require(:post).permit(:title, :content)
-  end
+    def post_params
+      params.require(:post).permit(:title, :content)
+    end
+
+
 end

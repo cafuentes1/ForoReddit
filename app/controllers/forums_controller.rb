@@ -3,7 +3,13 @@ class ForumsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @forums = Forum.all.order("created_at DESC")
+    @forums = Forum.all
+    if params[:search]
+      @forums = Forum.search(params[:search]).order("created_at DESC")
+    else
+      @forums = Forum.all.order("created_at DESC")
+
+    end
   end
 
   def show

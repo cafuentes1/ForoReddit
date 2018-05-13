@@ -1,5 +1,6 @@
 %h1 Publicaciones - Grupo 37
 
+
 - @posts.each do |post|
   %h2= link_to post.title, post
   %p
@@ -14,3 +15,4 @@
 - else
   = link_to "Iniciar Sesión", new_user_session_path
   = link_to "Registrarse", new_user_registration_path
+
