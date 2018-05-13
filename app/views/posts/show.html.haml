@@ -9,6 +9,6 @@
   %h3 Comentar
   = render "comments/form"
 
-= link_to "Editar", edit_post_path(@post)
-= link_to "Eliminar", post_path(@post) ,method: :delete, data: { confirm: "¿Estás seguro que quieres eliminar el post?"}
+= link_to "Editar", edit_forum_post_path(@forum, @post)
+= link_to "Eliminar", forum_post_path(@forum, @post), method: :delete, data: { confirm: "¿Estás Seguro?"}
 = link_to "Inicio", root_path

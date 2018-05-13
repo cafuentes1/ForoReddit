@@ -1,4 +1,4 @@
-= simple_form_for @post do |f|
+= simple_form_for([@forum, @forum.posts.build]) do |f|
   = f.input :title, label: 'Titulo'
   = f.input :content, label: 'Contenido'
   = f.submit

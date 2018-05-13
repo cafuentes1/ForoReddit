@@ -14,36 +14,46 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @forum = Forum.find(params[:forum_id])
+    @post = @forum.posts.create(post_params)
+    @post.user_id = current_user.id
 
     if @post.save
-      redirect_to @post
+      redirect_to @forum
     else
       render 'new'
     end
   end
 
   def edit
+    @forum = Forum.find(params[:forum_id])
+    @post = @forum.posts.find(params[:id])
   end
 
   def update
+    @forum = Forum.find(params[:forum_id])
+    @post = @forum.posts.find(params[:id])
+
     if @post.update(post_params)
-      redirect_to @post
+      redirect_to @forum
     else
       render 'edit'
     end
   end
 
   def destroy
+    @forum = Forum.find(params[:forum_id])
+    @post = @forum.posts.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_to @forum
   end
 
 
   private
 
   def find_post
-    @post = Post.find(params[:id])
+    @forum = Forum.find(params[:forum_id])
+    @post = @forum.posts.find(params[:id])
   end
 
   def post_params
