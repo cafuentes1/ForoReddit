@@ -44,6 +44,9 @@ class PostsController < ApplicationController
   def destroy
     @forum = Forum.find(params[:forum_id])
     @post = @forum.posts.find(params[:id])
+    @post.comments.each do |comment|
+      comment.destroy
+    end
     @post.destroy
     redirect_to @forum
   end

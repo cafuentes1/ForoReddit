@@ -35,6 +35,12 @@ class ForumsController < ApplicationController
   end
 
   def destroy
+    @forum.posts.each do |post|
+      post.comments.each do |comment|
+        comment.destroy
+      end
+      post.destroy
+    end
     @forum.destroy
     redirect_to forums_path
   end
