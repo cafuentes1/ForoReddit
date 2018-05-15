@@ -1,5 +1,6 @@
 = simple_form_for @forum do |f|
-  = f.input :title, label: 'Titulo'
-  = f.input :topic, label: 'Tema'
-  = f.input :description, label: 'Descripción'
-  = f.submit
+  = f.input :title, label: 'Titulo', input_html: { class: "form-control"}
+  = f.input :topic, label: 'Tema', input_html: { class: "form-control"}
+  = f.input :description, label: 'Descripción', input_html: { class: "form-control"}
+  %br/
+  = f.button :submit

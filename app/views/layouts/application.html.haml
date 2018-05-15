@@ -5,7 +5,19 @@
   = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
   = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 %body
-  %p.notice= notice
-  %p.alert= alert
-
-  = yield
+  %nav.navbar.navbar-default
+    .container
+      .navbar-brand Grupo 37
+      %ul.nav.navbar-nav
+        %li= link_to "Inicio", root_path
+        - if user_signed_in?
+          %li= link_to "Nuevo Foro", new_forum_path
+          %li= link_to "Cerrar Sesión", destroy_user_session_path, :method => :delete
+        - else
+          %li= link_to "Iniciar Sesión", new_user_session_path
+          %li= link_to "Registrarse", new_user_registration_path
+  .container
+    .col-md-6.col-md-offset-3
+      = yield
+    %p.notice= notice
+    %p.alert= alert

@@ -1,16 +1,9 @@
-%h1 Foros - Grupo 37
-
-- @forums.each do |forum|
-  %h2= link_to forum.title, forum
-  %p
-    Creado hace
-    = time_ago_in_words(forum.created_at)
-    by
-    = forum.user.name
-
-- if user_signed_in?
-  = link_to "Nuevo Foro", new_forum_path
-  = link_to "Cerrar Sesión", destroy_user_session_path, :method => :delete
-- else
-  = link_to "Iniciar Sesión", new_user_session_path
-  = link_to "Registrarse", new_user_registration_path
+#forums
+  - @forums.each do |forum|
+    .forum
+      %h2= link_to forum.title, forum
+      %p
+        Creado hace
+        = time_ago_in_words(forum.created_at)
+        by
+        = forum.user.name

@@ -1,12 +1,25 @@
-%h1= @forum.title
-%h2= @forum.topic
-%p= @forum.description
+#forums
+  .forum
+    %h2= @forum.title
+    %b= "Topic: " + @forum.topic
+    %p= "Description: " + @forum.description
+
+    = link_to "Editar", edit_forum_path(@forum), class: "btn btn-sm btn-default"
+    = link_to "Eliminar", forum_path(@forum), method: :delete, data: { confirm: "¿Estás seguro que quieres eliminar este foro?"}, class: "btn btn-sm btn-default"
 
 #posts
-= render @forum.posts
+  .post
+    = render @forum.posts
 
-= render "posts/form"
+    %h3 Crear nuevo Post
+    %br
 
-= link_to "Editar", edit_forum_path(@forum)
-= link_to "Eliminar", forum_path(@forum), method: :delete, data: { confirm: "¿Estás seguro que quieres eliminar este foro?"}
-= link_to "Inicio", forums_path
+    = render "posts/form"
+
+-#posts
+  .post
+    = render @forum.posts
+    %br
+
+    %h3 Nuevo Post
+    = render "post/form"
