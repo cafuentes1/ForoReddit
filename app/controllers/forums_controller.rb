@@ -1,6 +1,6 @@
 class ForumsController < ApplicationController
   before_action :find_forum, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :search]
 
   def index
     @forums = Forum.all.order("created_at DESC")
@@ -25,6 +25,14 @@ class ForumsController < ApplicationController
 
   def edit
     authorize! :update, @forum
+  end
+
+  def search
+    if params[:search].blank?
+      @forums = Forum.all.order("created_at DESC")
+    else
+      @forums = Forum.search(params)
+    end
   end
 
   def update
