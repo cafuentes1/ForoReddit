@@ -28,6 +28,7 @@ class PostsController < ApplicationController
   def edit
     @forum = Forum.find(params[:forum_id])
     @post = @forum.posts.find(params[:id])
+    authorize! :update, @post
   end
 
   def update

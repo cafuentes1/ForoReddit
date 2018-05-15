@@ -4,8 +4,10 @@
     %h3= @post.content
 
     %br
-    = link_to "Editar", edit_forum_post_path(@forum, @post), class: "btn btn-sm btn-default"
-    = link_to "Eliminar", forum_post_path(@forum, @post), method: :delete, data: { confirm: "¿Estás Seguro?"}, class: "btn btn-sm btn-default"
+    - if can? :update, @post
+      = link_to "Editar", edit_forum_post_path(@forum, @post), class: "btn btn-sm btn-default"
+    - if can? :destroy, @post
+      = link_to "Eliminar", forum_post_path(@forum, @post), method: :delete, data: { confirm: "¿Estás Seguro?"}, class: "btn btn-sm btn-default"
 
   .post
     %b= "Cantidad de comentarios: "
@@ -16,5 +18,6 @@
     = render @post.comments
     %br
 
-    %h3 Comentar
-    = render "comments/form"
+    - if can? :create, @forum
+      %h3 Comentar
+      = render "comments/form"

@@ -24,6 +24,7 @@ class ForumsController < ApplicationController
   end
 
   def edit
+    authorize! :update, @forum
   end
 
   def update
