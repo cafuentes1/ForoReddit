@@ -1,0 +1,10 @@
+%h1 Usuarios - Grupo 37
+
+- @users.each do |user|
+  %h3= link_to user.name, user
+  %p
+    Mail:
+    = user.email
+    |
+    Rol:
+    = user.role

@@ -1,0 +1,14 @@
+
+#user
+  .user
+    %h2= @user.name
+    %p
+      Mail:
+      = @user.email
+      |
+      Rol:
+      = @user.role
+
+    - if @user.admin?
+      = link_to "Dashboard", rails_admin_path, class: "btn btn-sm btn-default"
+    %h3= "Posts"
