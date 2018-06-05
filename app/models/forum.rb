@@ -1,10 +1,9 @@
 class Forum < ApplicationRecord
-  belongs_to :user
-  has_many :posts
 
-  def self.search(params)
-    forums = Forum.where("title LIKE ? or topic LIKE ? or description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
-    forums # returns the forums containing the search words
-  end
+  has_many :posts
+  has_many :users, through: :posts
+
+  validates :title, :topic, :description, presence: true
+  resourcify
 
 end

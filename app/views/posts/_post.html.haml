@@ -1,5 +1,0 @@
-.post
-  %h2= link_to post.title, forum_post_path(post.forum, post)
-  %p= 'Creado por ' + post.user.name
-  -#= link_to "Editar", edit_forum_post_path(post.forum, post)
-  -#= link_to "Eliminar", forum_post_path(post.forum, post), method: :delete, data: { confirm: "¿Estás Seguro?"}

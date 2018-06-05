@@ -1,5 +1,10 @@
 class Post < ApplicationRecord
-  belongs_to :user
+
   belongs_to :forum
-  has_many :comments
+  belongs_to :user
+  has_many :comments, dependent: :destroy
+
+  validates :title, :content, presence: true
+  resourcify
+
 end

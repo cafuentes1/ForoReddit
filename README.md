@@ -1,11 +1,24 @@
-# README - Grupo 37
+# README
 
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-Pagina:
-https://g37-ing.herokuapp.com
+Things you may want to cover:
 
-La pagina inicia en FOROS. Aqui, se puede Iniciar Sesión o Registrarse como nuevo usuario. Se puede crear un foro y verlos enlistados. Al ingresar a un foro se ve su tema y descripción y es posible editarlo y eliminarlo.
+* Ruby version
 
-Al final de la pagina esta el link hacia los POSTS. Se puede crear un post y verlos enlistados. Al ingresar a un post se ve su texto y es posible hacer un comentario.
+* System dependencies
 
-Por el momento los posts no estan asociados a foros.
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

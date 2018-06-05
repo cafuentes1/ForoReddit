@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :forums do
-    collection do
-      get :search # creates a new path for the searching
-    end
-    resources :posts do
-      resources :comments
-    end
+  
+  resources :forums
+  resources :posts do
+    resources :comments
   end
-  root 'forums#index'
+
+  root 'posts#index'
+
+  devise_for :users, controllers: { registrations: 'registrations'}
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

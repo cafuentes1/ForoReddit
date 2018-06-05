@@ -1,45 +1,61 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_comment, only: [:edit, :update, :show, :destroy]
+  before_action :set_post, only: [:create, :edit, :show, :update, :destroy]
 
   def create
-    @forum = Forum.find(params[:forum_id])
-    @post = @forum.posts.find(params[:post_id])
-    @comment = @post.comments.create(params[:comment].permit(:comment))
+    @comment = @post.comments.create(params[:comment].permit(:comment, :post_id))
     @comment.user_id = current_user.id
-    @comment.save
 
-    if @comment.save
-      redirect_to forum_post_path(@forum, @post)
-    else
-      render 'new'
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to post_path(@post) }
+        format.js # render create.js.erb
+      else
+        format.html { redirect_to post_path(@post), notice: 'Comentario no creado. Por favor intente nuevamente'}
+        format.js # render create.js.erb
+      end
     end
   end
 
+  def new
+  end
+
   def destroy
-    @forum = Forum.find(params[:forum_id])
-    @post = @forum.posts.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
     @comment.destroy
-    redirect_to forum_post_path(@forum, @post)
+    redirect_to post_path(@post)
   end
 
   def edit
-    @forum = Forum.find(params[:forum_id])
-    @post = @forum.posts.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
   end
 
   def update
-    @forum = Forum.find(params[:forum_id])
-    @post = @forum.posts.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
-
-    if @comment.update(params[:comment].permit(:comment))
-      redirect_to forum_post_path(@forum, @post)
-    else
-      render 'edit'
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to post_path(@post), notice: 'Comentario actualizado exitosamente'}
+      else
+        format.html { render :edit }
+        format.json { render json: @comment.errors, status: :unprocessable_entity}
+      end
     end
   end
 
+  private
+
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:comment)
+  end
 
 end

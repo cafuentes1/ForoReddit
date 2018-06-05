@@ -1,0 +1,38 @@
+<div class="columns">
+  <div class="column is-8">
+    <h1 class="title is-2 has-text-grey discussion-title"><%= @post.title %></h1>
+    <h3 class="subtitle is-5 has-text-grey-lighter">by <%= @post.user.username %> in <%= link_to @post.forum.title, @post.forum %></h3>
+    <div class="level">
+      <div class="level-left"></div>
+      <div class="level-right">
+        <% if post_author(@post) %>
+        <div class="buttons">
+            <%= link_to 'Editar Post', edit_post_path(@post), class:'button'%>
+            <%= link_to 'Eliminar', post_path(@post), method: :delete, data: { confirm: "Eliminar Post?" }, class:'button' %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="content"><%= @post.content %></div>
+
+    <h2 class="subtitle is-5 has-text-grey"><%= @post.comments.count %> Comentarios</h2>
+
+    <div id="post-comments">
+      <%= render @post.comments %>
+    </div>
+
+    <hr />
+
+    <h3 class="subtitle is-3 has-text-grey">Deja un comentario</h3>
+    <% if user_signed_in? %>
+      <%= render 'comments/form' %>
+    <% else %>
+    <p>Para comentar necesitas <%= link_to 'Iniciar Sesión', new_user_session_path %>. No tienes una cuenta?
+      <%= link_to 'Registrate', new_user_registration_path %>.</p>
+    <% end %>
+
+  </div>
+
+  <%= render 'sidebar' %>
+
+</div>

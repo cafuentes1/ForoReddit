@@ -1,66 +1,78 @@
 class ForumsController < ApplicationController
-  before_action :find_forum, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show, :search]
+  before_action :set_forum, only: [:show, :edit, :update, :destroy]
 
+  # GET /forums
+  # GET /forums.json
   def index
-    @forums = Forum.all.order("created_at DESC")
+    @forums = Forum.all
+    @posts = Post.all.order('created_at desc')
   end
 
+  # GET /forums/1
+  # GET /forums/1.json
   def show
+    @posts = Post.where('forum_id = ?', @forum.id)
+    @forums = Forum.all
   end
 
+  # GET /forums/new
   def new
     @forum = current_user.forums.build
   end
 
-  def create
-    @forum = current_user.forums.build(forum_params)
-
-    if @forum.save
-      redirect_to @forum
-    else
-      render 'new'
-    end
-  end
-
+  # GET /forums/1/edit
   def edit
     authorize! :update, @forum
   end
 
-  def search
-    if params[:search].blank?
-      @forums = Forum.all.order("created_at DESC")
-    else
-      @forums = Forum.search(params)
-    end
-  end
+  # POST /forums
+  # POST /forums.json
+  def create
+    @forum = current_user.forums.build(forum_params)
 
-  def update
-    if @forum.update(forum_params)
-      redirect_to @forum
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    @forum.posts.each do |post|
-      post.comments.each do |comment|
-        comment.destroy
+    respond_to do |format|
+      if @forum.save
+        format.html { redirect_to forums_path, notice: 'Forum was successfully created.' }
+        format.json { render :show, status: :created, location: @forum }
+      else
+        format.html { render :new }
+        format.json { render json: @forum.errors, status: :unprocessable_entity }
       end
-      post.destroy
     end
+  end
+
+  # PATCH/PUT /forums/1
+  # PATCH/PUT /forums/1.json
+  def update
+    respond_to do |format|
+      if @forum.update(forum_params)
+        format.html { redirect_to forums_path, notice: 'Forum was successfully updated.' }
+        format.json { render :show, status: :ok, location: @forum }
+      else
+        format.html { render :edit }
+        format.json { render json: @forum.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /forums/1
+  # DELETE /forums/1.json
+  def destroy
     @forum.destroy
-    redirect_to forums_path
+    respond_to do |format|
+      format.html { redirect_to forums_url, notice: 'Forum was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_forum
+      @forum = Forum.find(params[:id])
+    end
 
-  def find_forum
-    @forum = Forum.find(params[:id])
-  end
-
-  def forum_params
-    params.require(:forum).permit(:title, :topic, :description)
-  end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def forum_params
+      params.require(:forum).permit(:title, :topic, :description)
+    end
 end
