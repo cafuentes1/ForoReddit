@@ -2,7 +2,7 @@
 
 
 Pagina:
-https://g37-ing.herokuapp.com
+https://grupo37.herokuapp.com
 
 La pagina inicia en FOROS. Aqui, se puede Iniciar Sesión o Registrarse como nuevo usuario. Se puede crear un foro y verlos enlistados. Al ingresar a un foro se ve su tema y descripción y es posible editarlo y eliminarlo.
 
