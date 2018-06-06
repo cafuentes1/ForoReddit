@@ -5,7 +5,7 @@
     <div class="level">
       <div class="level-left"></div>
       <div class="level-right">
-        <% if post_author(@post) %>
+        <% if post_author(@post) || has_role?(:admin)%>
         <div class="buttons">
             <%= link_to 'Editar Post', edit_post_path(@post), class:'button'%>
             <%= link_to 'Eliminar', post_path(@post), method: :delete, data: { confirm: "Eliminar Post?" }, class:'button' %>
