@@ -5,8 +5,10 @@ class ForumsController < ApplicationController
   # GET /forums
   # GET /forums.json
   def index
-    @forums = Forum.all
-    @posts = Post.all.order('created_at desc')
+    #@forums = Forum.all
+    @forums = Forum.search(params[:search])
+    #@posts = Post.all.order('created_at desc')
+    @posts = Post.search(params[:search_p]).order('created_at desc')
   end
 
   # GET /forums/1

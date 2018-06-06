@@ -38,7 +38,8 @@
         <div class="navbar-end">
           <% if user_signed_in? %>
           <div class="navbar-item">
-            <div class="field is-grouped">
+            <div class="buttons">
+              <%= link_to 'Nuevo Foro', new_forum_path, class:"button is-dark" %>
               <%= link_to 'Nuevo Post', new_post_path, class:"button is-info" %>
             </div>
           </div>
@@ -52,6 +53,10 @@
          <% else %>
          <div class="navbar-item">
           <div class="field is-grouped">
+
+            <p class="control">
+              <%= link_to 'Nuevo Foro', new_forum_path, class:"button is-black" %>
+            </p>
 
             <p class="control">
               <%= link_to 'Nuevo Post', new_post_path, class:"button is-info" %>

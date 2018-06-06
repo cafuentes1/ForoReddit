@@ -13,7 +13,7 @@
         <% end %>
       </div>
     </div>
-    <div class="content"><%= @post.content %></div>
+    <div class="content"><%= markdown(@post.content) %></div>
 
     <h2 class="subtitle is-5 has-text-grey"><%= @post.comments.count %> Comentarios</h2>
 
