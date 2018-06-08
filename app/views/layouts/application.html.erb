@@ -46,7 +46,7 @@
           <div class="navbar-item has-dropdown is-hoverable">
             <%= link_to 'Cuenta', edit_user_registration_path, class: "navbar-link" %>
             <div class="navbar-dropdown is-right">
-              <%= link_to current_user.username, edit_user_registration_path, class:"navbar-item" %>
+              <%= link_to current_user.username, user_path(current_user.id), class:"navbar-item" %>
               <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete, class:"navbar-item" %>
             </div>
           </div>
