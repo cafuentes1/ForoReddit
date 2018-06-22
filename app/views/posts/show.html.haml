@@ -8,6 +8,7 @@
       = link_to "Editar", edit_forum_post_path(@forum, @post), class: "btn btn-sm btn-default"
     - if can? :destroy, @post
       = link_to "Eliminar", forum_post_path(@forum, @post), method: :delete, data: { confirm: "¿Estás Seguro?"}, class: "btn btn-sm btn-default"
+    = link_to "Agregar a Favoritos", favorites_path(@forum, @post.id)
 
   .post
     %b= "Cantidad de comentarios: "
