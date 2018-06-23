@@ -33,6 +33,7 @@ GEM
       activemodel (= 5.1.6)
       activesupport (= 5.1.6)
       arel (~> 8.0)
+    activerecord-reputation-system (3.0.1)
     activesupport (5.1.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -204,6 +205,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-reputation-system
   bulma-rails (~> 0.6.2)
   byebug
   cancancan (~> 2.1, >= 2.1.3)

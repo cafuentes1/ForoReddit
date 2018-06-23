@@ -21,6 +21,8 @@
               </em>
             </p>
           </div>
+          <%= link_to "up", vote_post_path(post, type: "up"), method: "post" %>
+          <%= link_to "down", vote_post_path(post, type: "down"), method: "post" %>
         </div>
 
         <% if post_author(post) || has_role?(:admin)%>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :forums
   resources :posts do
     resources :comments
+    member {post :vote}
   end
 
   resources :users

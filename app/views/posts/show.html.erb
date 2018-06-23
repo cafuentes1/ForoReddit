@@ -2,17 +2,30 @@
   <div class="column is-8">
     <h1 class="title is-2 has-text-grey discussion-title"><%= @post.title %></h1>
     <h3 class="subtitle is-5 has-text-grey-lighter">by <%= @post.user.username %> in <%= link_to @post.forum.title, @post.forum %></h3>
-    <div class="level">
-      <div class="level-left"></div>
-      <div class="level-right">
-        <% if post_author(@post) || has_role?(:admin)%>
-        <div class="buttons">
-            <%= link_to 'Editar Post', edit_post_path(@post), class:'button'%>
-            <%= link_to 'Eliminar', post_path(@post), method: :delete, data: { confirm: "Eliminar Post?" }, class:'button' %>
+    <% if user_signed_in? %>
+    <div class="column has-text-right">
+      <nav class="level is-mobile">
+        <h3 class="subtitle is-3 has-text-grey"><%= pluralize @post.reputation_for(:votes).to_i, "point" %></h3>
+        <div class="level-right">
+          <a class="level-item">
+            <%= link_to vote_post_path(@post, type: "up"), method: "post" do %>
+            <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
+            <% end %>
+          </a>
+          <a class="level-item">
+            <%= link_to vote_post_path(@post, type: "down"), method: "post" do %>
+            <span class="icon is-small"><i class="fa fa-thumbs-o-down"></i></span>
+            <% end %>
+          </a>
         </div>
-        <% end %>
-      </div>
+      </nav>
+    <% end %>
+    <% if post_author(@post) || has_role?(:admin)%>
+      <%= link_to 'Editar', edit_post_path(@post), class:'button' %>
+      <%= link_to 'Eliminar', @post, method: :delete, data: { confirm: 'Estás seguro?' }, class: "button" %>
     </div>
+    <% end %>
+
     <div class="content"><%= markdown(@post.content) %></div>
 
     <h2 class="subtitle is-5 has-text-grey"><%= @post.comments.count %> Comentarios</h2>

@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
+  has_reputation :votes, source: :user, aggregated_by: :sum
+
   validates :title, :content, presence: true
   resourcify
 

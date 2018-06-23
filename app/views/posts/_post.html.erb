@@ -18,15 +18,35 @@
               </small>
               </em>
             </p>
+            <%#= pluralize post.reputation_for(:votes).to_i, "vote" %>
+            <%#= link_to '<i class="fa fa-thumbs-o-up"></i>  '.html_safe, vote_post_path(post, type: "up"), method: "post" %>
+            <%#= link_to '<i class="fa fa-thumbs-o-down"></i>'.html_safe, vote_post_path(post, type: "down"), method: "post" %>
           </div>
         </div>
 
-        <% if post_author(post) || has_role?(:admin)%>
         <div class="column has-text-right">
+        <% if user_signed_in? %>
+          <nav class="level is-mobile">
+            <%= pluralize post.reputation_for(:votes).to_i, "point" %>
+            <div class="level-right">
+              <a class="level-item">
+                <%= link_to vote_post_path(post, type: "up"), method: "post" do %>
+                <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
+                <% end %>
+              </a>
+              <a class="level-item">
+                <%= link_to vote_post_path(post, type: "down"), method: "post" do %>
+                <span class="icon is-small"><i class="fa fa-thumbs-o-down"></i></span>
+                <% end %>
+              </a>
+            </div>
+          </nav>
+        <% end %>
+        <% if post_author(post) || has_role?(:admin)%>
           <%= link_to 'Editar', edit_post_path(post), class:'button' %>
           <%= link_to 'Eliminar', post, method: :delete, data: { confirm: 'Estás seguro?' }, class: "button" %>
-        </div>
         <% end %>
+        </div>
 
       </div>
   </div>
