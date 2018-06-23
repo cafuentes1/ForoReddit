@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_comment, only: [:edit, :update, :show, :destroy]
-  before_action :set_post, only: [:create, :edit, :show, :update, :destroy]
+  before_action :set_comment, only: [:edit, :update, :show, :destroy, :vote]
+  before_action :set_post, only: [:create, :edit, :show, :update, :destroy, :vote]
 
   def create
     @comment = @post.comments.create(params[:comment].permit(:comment, :post_id))
@@ -15,6 +15,16 @@ class CommentsController < ApplicationController
         format.html { redirect_to post_path(@post), notice: 'Comentario no creado. Por favor intente nuevamente'}
         format.js # render create.js.erb
       end
+    end
+  end
+
+  def vote
+    value = params[:type] == "up" ? 1 : -1
+    @comment.add_or_update_evaluation(:votes, value, current_user)
+    #redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      format.html { redirect_to post_path(@post) }
+      format.js # render create.js.erb
     end
   end
 

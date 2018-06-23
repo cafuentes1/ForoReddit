@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :forums
   resources :posts do
-    resources :comments
+    resources :comments do
+      member {post :vote}
+    end
     member {post :vote}
   end
 

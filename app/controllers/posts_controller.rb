@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :vote]
   before_action :find_forums, only: [:index, :show, :new, :edit]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
 
   def vote
     value = params[:type] == "up" ? 1 : -1
-    @post = Post.find(params[:id])
+    #@post = Post.find(params[:id])
     @post.add_or_update_evaluation(:votes, value, current_user)
     redirect_back(fallback_location: root_path)
   end

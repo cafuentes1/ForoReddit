@@ -2,29 +2,37 @@
   <div class="column is-8">
     <h1 class="title is-2 has-text-grey discussion-title"><%= @post.title %></h1>
     <h3 class="subtitle is-5 has-text-grey-lighter">by <%= @post.user.username %> in <%= link_to @post.forum.title, @post.forum %></h3>
-    <% if user_signed_in? %>
+    <%# if user_signed_in? && !post_author(@post)  %>
     <div class="column has-text-right">
       <nav class="level is-mobile">
-        <h3 class="subtitle is-3 has-text-grey"><%= pluralize @post.reputation_for(:votes).to_i, "point" %></h3>
+        <h5><%= %></h5>
         <div class="level-right">
-          <a class="level-item">
-            <%= link_to vote_post_path(@post, type: "up"), method: "post" do %>
-            <span class="icon is-small"><i class="fa fa-thumbs-o-up"></i></span>
-            <% end %>
-          </a>
-          <a class="level-item">
-            <%= link_to vote_post_path(@post, type: "down"), method: "post" do %>
-            <span class="icon is-small"><i class="fa fa-thumbs-o-down"></i></span>
-            <% end %>
-          </a>
+          <% if user_signed_in? && !post_author(@post)  %>
+            <a class="level-item">
+              <%= pluralize @post.reputation_for(:votes).to_i, "puntos" %>
+            </a>
+            <a class="level-item">
+              <%= link_to vote_post_path(@post, type: "up"), method: "post" do %>
+              <span class="icon is-small"><i class="fa fa-thumbs-o-up fa_custom fa-2x"></i></span>
+              <% end %>
+            </a>
+            <a class="level-item"></a>
+            <a class="level-item">
+              <%= link_to vote_post_path(@post, type: "down"), method: "post" do %>
+              <span class="icon is-small"><i class="fa fa-thumbs-o-down fa_custom fa-2x"></i></span>
+              <% end %>
+            </a>
+          <% end %>
         </div>
       </nav>
-    <% end %>
+    <%# end %>
     <% if post_author(@post) || has_role?(:admin)%>
       <%= link_to 'Editar', edit_post_path(@post), class:'button' %>
       <%= link_to 'Eliminar', @post, method: :delete, data: { confirm: 'Estás seguro?' }, class: "button" %>
-    </div>
     <% end %>
+    </div>
+
+
 
     <div class="content"><%= markdown(@post.content) %></div>
 
