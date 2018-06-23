@@ -2,8 +2,10 @@
 
 one:
   user: one
-  post: one
+  favorited: one
+  favorited_type: Favorited
 
 two:
   user: two
-  post: two
+  favorited: two
+  favorited_type: Favorited

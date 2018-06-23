@@ -1,19 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-
+  resources :favorite_posts, only: [:create, :destroy] #path para favorites
   resources :forums do
-
     collection do
       get :search # creates a new path for the searching
     end
     resources :posts do
       resources :comments
-    end
-  end
-
-  resources :favorites do
-    collection do
-      get :favorite
     end
   end
   root 'forums#index'
