@@ -11,9 +11,9 @@
 
     - if user_signed_in?
       - unless current_user.favorite_posts.exists?
-        = link_to 'Add to favorites', favorite_posts_path(@post),:data => {:fid => @forum.id, :pid => @post.id}, method: :post
+        = link_to 'Add to favorites', favorite_posts_path(:fid => @forum.id, :pid => @post.id, :post => @post), method: :post, class: "btn btn-sm btn-default"
       - else
-        = link_to 'Remove from favorites', favorite_post_path(@post), :data => {:fid => @forum.id, :pid => @post.id}, method: :delete
+        = link_to 'Remove from favorites', favorite_post_path(@post), :data => {:fid => @forum.id, :pid => @post.id}, method: :delete, class: "btn btn-sm btn-default"
 
   .post
     %b= "Cantidad de comentarios: "

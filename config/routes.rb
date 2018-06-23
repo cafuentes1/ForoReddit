@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :search # creates a new path for the searching
     end
-    resources :posts do
+    resources :posts  do
       resources :comments
     end
   end

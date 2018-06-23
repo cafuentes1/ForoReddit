@@ -1,9 +1,7 @@
 class FavoritePostsController < ApplicationController
-  # before_action :set_forum_post
+  before_action :set_forum_post
   
   def create
-    puts "PARAMS 2"
-    puts params
     if Favorite.create(favorited: @post, user: current_user)
       redirect_to forum_post_path(@forum, @post), notice: 'post has been favorited'
     else
@@ -19,9 +17,7 @@ class FavoritePostsController < ApplicationController
   private
   
   def set_forum_post
-    puts "PARAMS"
-    puts params
-    @post = Post.find(params[:data-pid])
-    @forum = Forum.find(params[:data-fid])
+    @post = Post.find(params[:pid])
+    @forum = Forum.find(params[:fid])
   end
 end
