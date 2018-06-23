@@ -10,10 +10,10 @@
       = link_to "Eliminar", forum_post_path(@forum, @post), method: :delete, data: { confirm: "¿Estás Seguro?"}, class: "btn btn-sm btn-default"
 
     - if user_signed_in?
-      - unless current_user.favorite_posts.exists?(id: @post.id)
-        = link_to 'Add to favorites', favorite_posts_path(post_id: @post), method: :post
+      - unless current_user.favorite_posts.exists?
+        = link_to 'Add to favorites', favorite_posts_path(@post),:data => {:fid => @forum.id, :pid => @post.id}, method: :post
       - else
-        = link_to 'Remove from favorites', favorite_post_path(@post), method: :delete
+        = link_to 'Remove from favorites', favorite_post_path(@post), :data => {:fid => @forum.id, :pid => @post.id}, method: :delete
 
   .post
     %b= "Cantidad de comentarios: "

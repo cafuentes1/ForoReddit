@@ -1,22 +1,27 @@
 class FavoritePostsController < ApplicationController
-  before_action :set_post
+  # before_action :set_forum_post
   
   def create
+    puts "PARAMS 2"
+    puts params
     if Favorite.create(favorited: @post, user: current_user)
-      redirect_to @post, notice: 'post has been favorited'
+      redirect_to forum_post_path(@forum, @post), notice: 'post has been favorited'
     else
-      redirect_to @post, alert: 'Something went wrong...*sad panda*'
+      redirect_to forum_post_path(@forum, @post), alert: 'Something went wrong...*sad panda*'
     end
   end
   
   def destroy
     Favorite.where(favorited_id: @post.id, user_id: current_user.id).first.destroy
-    redirect_to @post, notice: 'post is no longer in favorites'
+    redirect_to forum_post_path(@forum.id, @post), notice: 'post is no longer in favorites'
   end
   
   private
   
-  def set_post
-    @post = Post.find(params[:post_id] || params[:id])
+  def set_forum_post
+    puts "PARAMS"
+    puts params
+    @post = Post.find(params[:data-pid])
+    @forum = Forum.find(params[:data-fid])
   end
 end
