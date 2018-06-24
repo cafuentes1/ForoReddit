@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       member {post :vote}
     end
     member {post :vote}
+    put :favorite, on: :member
   end
 
   resources :users

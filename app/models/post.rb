@@ -4,6 +4,9 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
 
+  has_many :favorite_posts
+  has_many :favorited_by, through: :favorite_posts, source: :user 
+
   has_reputation :votes, source: :user, aggregated_by: :sum
 
   validates :title, :content, presence: true

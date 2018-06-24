@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :vote, :favorite]
   before_action :find_forums, only: [:index, :show, :new, :edit]
   before_action :authenticate_user!, except: [:index, :show]
 
@@ -47,6 +47,19 @@ class PostsController < ApplicationController
     #@post = Post.find(params[:id])
     @post.add_or_update_evaluation(:votes, value, current_user)
     redirect_back(fallback_location: root_path)
+  end
+
+  def favorite
+    type = params[:type]
+    if type == "favorite"
+      current_user.favorites << @post
+      redirect_back(fallback_location: root_path)
+    elsif type == "unfavorite"
+      current_user.favorites.delete(@post)
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   # PATCH/PUT /posts/1

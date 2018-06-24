@@ -8,7 +8,7 @@
 
     <div class="level">
       <div class="level-left">
-        <h3 class="subtitle is-3 has-text-grey">Reputación: <%= @user.reputation_for(:rp).to_i %> puntos</h3> 
+        <h3 class="subtitle is-3 has-text-grey">Reputación: <%= @user.reputation_for(:rp).to_i %> puntos</h3>
       </div>
       <div class="level-right">
         <% if @user == current_user || has_role?(:admin)%>
@@ -25,6 +25,13 @@
 
   </div>
 
+</div>
+
+<div class="column is-fullwidth">
+  <div id="user-favorites-posts">
+    <h3 class="title is-5 has-text-grey-light">Posts Favoritos</h3>
+    <%= render @user.favorites %>
+  </div>
 </div>
 
 <div class="column is-fullwidth">

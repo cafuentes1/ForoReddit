@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :forums, through: :posts
 
+  has_many :favorite_posts
+  has_many :favorites, through: :favorite_posts, source: :post
+
   has_reputation :posts_votes, source: {reputation: :votes, of: :posts}, aggregated_by: :sum
   has_reputation :comments_votes, source: {reputation: :votes, of: :comments}, aggregated_by: :sum
   has_reputation :rp, source: [{reputation: :posts_votes}, {reputation: :comments_votes}], aggregated_by: :sum

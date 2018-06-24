@@ -22,14 +22,31 @@
               <span class="icon is-small"><i class="fa fa-thumbs-o-down fa_custom fa-2x"></i></span>
               <% end %>
             </a>
+            <a class="level-item"></a>
+          <% end %>
+          <% if !current_user.favorites.exists?(@post.id) %>
+          <a class="level-item">
+            <%= link_to favorite_post_path(@post, type: "favorite"), method: :put do %>
+            <span class="icon is-small"><i class="fa fa-star-o fa_custom fa-2x"></i></span>
+            <% end %>
+          </a>
+          <% end %>
+          <% if current_user.favorites.exists?(@post.id) %>
+          <a class="level-item">
+            <%= link_to favorite_post_path(@post, type: "unfavorite"), method: :put do %>
+            <span class="icon is-small"><i class="fa fa-star fa_custom fa-2x"></i></span>
+            <% end %>
+          </a>
           <% end %>
         </div>
       </nav>
     <%# end %>
+
     <% if post_author(@post) || has_role?(:admin)%>
       <%= link_to 'Editar', edit_post_path(@post), class:'button' %>
-      <%= link_to 'Eliminar', @post, method: :delete, data: { confirm: 'Estás seguro?' }, class: "button" %>
+      <%= link_to 'Eliminar', @post, method: :delete, data: { confirm: 'Estás seguro?' }, class: "button is-danger" %>
     <% end %>
+
     </div>
 
 
