@@ -9,8 +9,13 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :forums, through: :posts
 
+  #Posts Favoritos
   has_many :favorite_posts
   has_many :favorites, through: :favorite_posts, source: :post
+
+  #Subscripción a Foros
+  has_many :subscription_forums
+  has_many :subscriptions, through: :subscription_forums, source: :forum
 
   has_reputation :posts_votes, source: {reputation: :votes, of: :posts}, aggregated_by: :sum
   has_reputation :comments_votes, source: {reputation: :votes, of: :comments}, aggregated_by: :sum

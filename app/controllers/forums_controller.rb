@@ -1,5 +1,5 @@
 class ForumsController < ApplicationController
-  before_action :set_forum, only: [:show, :edit, :update, :destroy]
+  before_action :set_forum, only: [:show, :edit, :update, :destroy, :subscribe]
   before_action :authenticate_user!, except: [:index, :show]
 
   # GET /forums
@@ -41,6 +41,19 @@ class ForumsController < ApplicationController
         format.html { render :new }
         format.json { render json: @forum.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def subscribe
+    type = params[:type]
+    if type == "subscribe"
+      current_user.subscriptions << @forum
+      redirect_back(fallback_location: root_path)
+    elsif type == "unsubscribe"
+      current_user.subscriptions.delete(@forum)
+      redirect_back(fallback_location: root_path)
+    else
+      redirect_back(fallback_location: root_path)
     end
   end
 

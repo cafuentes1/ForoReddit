@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :forums
+  resources :forums do
+    put :subscribe, on: :member
+    end
   resources :posts do
     resources :comments do
       member {post :vote}

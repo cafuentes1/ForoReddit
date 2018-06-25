@@ -23,12 +23,21 @@
     <h1 class="title is-2 has-text-grey discussion-title"><%= @forum.title %></h1>
     <h3 class="subtitle is-5 has-text-grey-lighter">Topic: <%= @forum.topic %></h3>
     <div class="level">
-      <div class="level-left"></div>
+      <div class="level-left">
+        <div class="buttons">
+          <% if !current_user.subscriptions.exists?(@forum.id) %>
+            <%= link_to 'Seguir', subscribe_forum_path(@forum, type: "subscribe"), class:'button is-info', method: :put %>
+          <% end %>
+          <% if current_user.subscriptions.exists?(@forum.id) %>
+            <%= link_to 'Dejar de seguir', subscribe_forum_path(@forum, type: "unsubscribe"), class:'button is-danger', method: :put %>
+          <% end %>
+        </div>
+      </div>
       <div class="level-right">
         <% if has_role?(:admin) %>
         <div class="buttons">
             <%= link_to 'Editar Foro', edit_forum_path(@forum), class:'button'%>
-            <%= link_to 'Eliminar', forum_path(@forum), method: :delete, data: { confirm: "Eliminar Foro?" }, class:'button' %>
+            <%= link_to 'Eliminar', forum_path(@forum), method: :delete, data: { confirm: "Eliminar Foro?" }, class:'button is-danger' %>
         </div>
         <% end %>
       </div>
