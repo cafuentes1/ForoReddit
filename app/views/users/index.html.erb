@@ -1,21 +1,21 @@
 <% @users.each do |user| %>
-  <div class="columns">
+<div class="column is-10">
+  <div class="columns bb-not-last pv10">
     <div class="column is-1">
       <%= gravatar_image_tag(user.email, class:'border-radius-50', size: 48, alt: user.username) %>
     </div>
     <div class="column is-8">
-      <h1 class="title is-2 has-text-grey discussion-title"><%= user.username %></h1>
-      <h3 class="subtitle is-5 has-text-grey-lighter">Mail: <%= user.email %></h3>
-      <div class="level">
-        <div class="level-left"></div>
-        <div class="level-right">
-          <% if has_role?(:admin)%>
-          <div class="buttons">
-              <%= link_to 'Nombrar Admin', edit_user_registration_path, class:'button'%>
-          </div>
-          <% end %>
-        </div>
+      <div class="content">
+        <h1 class="title is-4 has-text-grey discussion-title"><%= user.username %></h1>
+        <h3 class="subtitle is-6 has-text-grey-lighter">Mail: <%= user.email %> | Reputación: <%= user.reputation_for(:rp).to_i %> puntos</h3>
       </div>
     </div>
+    <div class="column has-text-right">
+      <nav class="level is-mobile">
+        <%= pluralize user.reputation_for(:rp).to_i, "punto" %>
+        <div class="level-right"><%= link_to 'Ver Perfil', user_path(user.id), class:'button'%></div>
+      </nav>
+    </div>
   </div>
+</div>
 <% end %>

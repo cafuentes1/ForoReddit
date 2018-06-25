@@ -39,6 +39,9 @@
           <% if user_signed_in? %>
           <div class="navbar-item">
             <div class="buttons">
+              <% if has_role?(:admin) %>
+                <%= link_to 'Usuarios', users_path, class:"button" %>
+              <% end %>
               <%= link_to 'Nuevo Foro', new_forum_path, class:"button is-dark" %>
               <%= link_to 'Nuevo Post', new_post_path, class:"button is-info" %>
             </div>

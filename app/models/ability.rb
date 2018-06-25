@@ -23,6 +23,11 @@ class Ability
       can :read, [Forum, Post, Comment]
     else
       # All registered users
+
+      can :read, User do |u|
+        u.id == user.id
+      end
+
       can :update, Forum do |forum|
         forum.user == user
       end
@@ -45,6 +50,9 @@ class Ability
       # Different roles
       if user.has_role? :admin
         can :manage, :all
+        can :list, [User]
+
+
       elsif user.has_role? :mod
         can :manage, [Forum, Post, Comment]
       end
