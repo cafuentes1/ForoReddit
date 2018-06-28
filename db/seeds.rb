@@ -1,9 +1,3 @@
-User::HABTM_Roles.create!([
-  {user_id: 1, role_id: 1}
-])
-Role::HABTM_Users.create!([
-  {user_id: 1, role_id: 1}
-])
 User.create!([
   {email: "cafuentes1@uc.cl", encrypted_password: "$2a$11$ltmjOGDoW3QNfcUWDx.yuOL20hsAuWKi1wzixCuhxr.Kyjk67U1WG", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 18, current_sign_in_at: "2018-06-25 03:49:05", last_sign_in_at: "2018-06-24 02:26:01", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "cafuentes1"},
   {email: "cafuentes2@uc.cl", encrypted_password: "$2a$11$G/Z/ZMfkF8IXIpMCEzvTj.NquxhoIPTy2tGSUgCEFF7IHrVyGQCSC", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 12, current_sign_in_at: "2018-06-25 06:04:08", last_sign_in_at: "2018-06-25 03:16:05", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", username: "cafuentes2"}
@@ -46,7 +40,4 @@ Forum.create!([
   {title: "Mad Men", topic: "Series", description: "This is a forum about Mad Men TV series.", post_id: nil},
   {title: "The Beatles", topic: "Music", description: "Forum about The Beatles", post_id: nil},
   {title: "Queen", topic: "Music", description: "Forum about the band Queen", post_id: nil}
-])
-Role.create!([
-  {name: "admin", resource_type: nil, resource_id: nil}
 ])
