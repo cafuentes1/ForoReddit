@@ -1,0 +1,94 @@
+<div class="level">
+  <div class="level-left">
+    <h1 class="title is-2">Foros</h1>
+  </div>
+  <div class="level-right">
+    <%= form_tag forums_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search], options = {style:"height:36px;border-radius:5px;", placeholder:"Buscar Foro"}%>
+      <%= submit_tag "Buscar Foro", class:'button is-dark' %>
+    <% end %>
+  </div>
+</div>
+
+<table class="table is-fullwidth">
+  <thead>
+    <!--<tr>
+      <th>Foros</th>
+      <th colspan="3"></th>
+    </tr>-->
+  </thead>
+  <tbody>
+    <% @forums.each do |forum| %>
+    <tr>
+      <td><%= link_to forum.title, forum %></td>
+      <td><%= forum.topic %></td>
+      <td><%= forum.description %></td>
+      <td>
+        <%if has_role?(:admin)%>
+        <div class="buttons is-right">
+          <%= link_to 'Ver Foro', forum, class:'button' %>
+          <%= link_to 'Editar Foro', edit_forum_path(forum), class:'button' %>
+          <%= link_to 'Eliminar', forum, class:'button is-danger', method: :delete, data: { confirm: "Estás seguro que quieres eliminar este Foro? " } %>
+        </div>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<div class="level">
+  <div class="level-left">
+    <h3 class="title is-2 has-text-grey-light">Ultimos Posts</h3>
+  </div>
+  <div class="level-right">
+    <%= form_tag forums_path, :method => 'get' do %>
+      <%= text_field_tag :search_p, params[:search_p], options = {style:"height:36px;border-radius:5px;", placeholder:"Buscar Post"} %>
+      <%= submit_tag "Buscar Post", class:'button is-dark'  %>
+    <% end %>
+  </div>
+</div>
+
+<!--<div class="column is-fullwidth">
+  <div class="posts">
+    <% @posts.each do |post| %>
+      <div class="columns bb-not-last pv10">
+        <div class="column is-1">
+          <%= gravatar_image_tag(post.user.email, class:'border-radius-50', size: 48, alt: post.user.username) %>
+        </div>
+        <div class="column is-8">
+          <%= link_to post do %>
+            <h3 class="title is-5"><%= post.title %></h3>
+          <% end %>
+          <div class="content">
+            <%= truncate(post.content, length: 140) %>
+            <p><em><small>Posted <%= time_ago_in_words(post.created_at) %> ago in
+              <% if post.forum %>
+                <%= link_to post.forum.title, post.forum %>
+              <% end %>
+              by <%= post.user.username %>
+              </small>
+              </em>
+            </p>
+          </div>
+        </div>
+
+        <% if post_author(post) || has_role?(:admin)%>
+        <div class="column has-text-right">
+          <%= link_to 'Editar', edit_post_path(post), class:'button' %>
+          <%= link_to 'Eliminar', post, method: :delete, data: { confirm: 'Estás seguro?' }, class: "button" %>
+        </div>
+        <% end %>
+
+      </div>
+    <% end %>
+  </div>
+</div>-->
+
+<div class="column is-fullwidth">
+  <div class="posts">
+    <%= render @posts %>
+  </div>
+</div>

@@ -1,3 +1,18 @@
+'''class Ability
+  include CanCan::Ability
+
+  def initialize(user)
+
+    user ||= User.new # guest user (not logged in)
+    if user.has_role? :admin
+      can :manage, :all
+    else
+      can :read, :all
+    end
+
+  end
+end'''
+
 class Ability
   include CanCan::Ability
 
@@ -8,6 +23,11 @@ class Ability
       can :read, [Forum, Post, Comment]
     else
       # All registered users
+
+      can :read, User do |u|
+        u.id == user.id
+      end
+
       can :update, Forum do |forum|
         forum.user == user
       end
@@ -28,11 +48,13 @@ class Ability
       can :create, Comment
 
       # Different roles
-      case user.role
-        when 'admin'
-          can :manage, :all
-        when 'manager'
-          can :manage, [Forum, Post, Comment]
+      if user.has_role? :admin
+        can :manage, :all
+        can :list, [User]
+
+
+      elsif user.has_role? :mod
+        can :manage, [Forum, Post, Comment]
       end
     end
 

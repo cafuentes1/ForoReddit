@@ -1,0 +1,40 @@
+<div class="column is-8">
+  <div class="posts">
+      <div class="columns bb-not-last pv10">
+        <div class="column is-1">
+          <%= gravatar_image_tag(post.user.email, class:'border-radius-50', size: 48, alt: post.user.username) %>
+        </div>
+        <div class="column is-8">
+          <%= link_to post do %>
+            <h3 class="title is-5"><%= post.title %></h3>
+          <% end %>
+          <div class="content">
+            <%= truncate(post.content, length: 140) %>
+            <p><em><small>Posted <%= time_ago_in_words(post.created_at) %> ago in
+              <% if post.forum %>
+                <%= link_to post.forum.title, post.forum %>
+              <% end %>
+              by <%= post.user.username %>
+              </small>
+              </em>
+            </p>
+            <%#= pluralize post.reputation_for(:votes).to_i, "vote" %>
+            <%#= link_to '<i class="fa fa-thumbs-o-up"></i>  '.html_safe, vote_post_path(post, type: "up"), method: "post" %>
+            <%#= link_to '<i class="fa fa-thumbs-o-down"></i>'.html_safe, vote_post_path(post, type: "down"), method: "post" %>
+          </div>
+        </div>
+
+        <div class="column has-text-right">
+          <nav class="level is-mobile">
+            <%= pluralize post.reputation_for(:votes).to_i, "punto" %>
+            <div class="level-right"></div>
+          </nav>
+        <% if post_author(post) || has_role?(:admin)%>
+          <%= link_to 'Editar', edit_post_path(post), class:'button' %>
+          <%= link_to 'Eliminar', post, method: :delete, data: { confirm: 'Estás seguro?' }, class: "button" %>
+        <% end %>
+        </div>
+
+      </div>
+  </div>
+</div>

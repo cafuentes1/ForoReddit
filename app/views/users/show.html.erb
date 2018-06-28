@@ -1,0 +1,74 @@
+<div class="columns">
+  <div class="column is-1">
+    <%= gravatar_image_tag(@user.email, class:'border-radius-50', size: 48, alt: @user.username) %>
+  </div>
+  <div class="column is-8">
+    <h1 class="title is-2 has-text-grey discussion-title"><%= @user.username %></h1>
+    <h3 class="subtitle is-5 has-text-grey-lighter">Mail: <%= @user.email %></h3>
+
+    <div class="level">
+      <div class="level-left">
+        <h3 class="subtitle is-3 has-text-grey">Reputación: <%= @user.reputation_for(:rp).to_i %> puntos</h3>
+      </div>
+      <div class="level-right">
+        <% if @user == current_user || has_role?(:admin)%>
+        <div class="buttons">
+            <%= link_to 'Editar Usuario', edit_user_registration_path, class:'button'%>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <h2 class="subtitle is-5 has-text-grey"><%= @posts.count %> Posts</h2>
+
+    <hr />
+
+  </div>
+
+</div>
+
+<div class="column is-fullwidth">
+  <div id="user-subscribed-forums">
+    <h3 class="title is-5 has-text-grey-light">Foros Suscritos</h3>
+    <table class="table is-fullwidth">
+      <thead>
+        <!--<tr>
+          <th>Foros</th>
+          <th colspan="3"></th>
+        </tr>-->
+      </thead>
+      <tbody>
+        <% @user.subscriptions.each do |forum| %>
+        <tr>
+          <td><%= link_to forum.title, forum %></td>
+          <td><%= forum.topic %></td>
+          <td><%= forum.description %></td>
+          <td>
+            <%if has_role?(:admin)%>
+            <div class="buttons is-right">
+              <%= link_to 'Ver Foro', forum, class:'button' %>
+              <%= link_to 'Editar Foro', edit_forum_path(forum), class:'button' %>
+              <%= link_to 'Eliminar', forum, class:'button is-danger', method: :delete, data: { confirm: "Estás seguro que quieres eliminar este Foro? " } %>
+            </div>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="column is-fullwidth">
+  <div id="user-favorites-posts">
+    <h3 class="title is-5 has-text-grey-light">Posts Favoritos</h3>
+    <%= render @user.favorites %>
+  </div>
+</div>
+
+<div class="column is-fullwidth">
+  <div id="user-posts">
+    <h3 class="title is-5 has-text-grey-light">Ultimos Posts</h3>
+    <%= render @posts %>
+  </div>
+</div>
