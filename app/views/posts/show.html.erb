@@ -56,6 +56,8 @@
     <div class="content"><%= markdown(@post.content) %></div>
 
     <h2 class="subtitle is-5 has-text-grey"><%= @post.comments.count %> Comentarios</h2>
+    <%# SOCIAL SHARE BUTTON  %>
+    <%= social_share_button_tag(@post.title) %>
 
     <div id="post-comments">
       <%= render @post.comments %>
