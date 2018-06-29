@@ -24,9 +24,9 @@ class Ability
     else
       # All registered users
 
-      can :read, User do |u|
-        u.id == user.id
-      end
+      #can :read, User do |u|
+        #u.id == user.id
+      #end
 
       can :update, Forum do |forum|
         forum.user == user
