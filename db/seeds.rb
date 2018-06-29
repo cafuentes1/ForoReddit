@@ -13,16 +13,16 @@ Forum.create!([
   {title: "Queen", topic: "Music", description: "Forum about the band Queen"}
 ])
 Post.create!([
-  {title: "Test Post", content: "This is a test post used for testing our forum. Edited. Edited.", user_id: 1},
-  {title: "Test Post 2", content: "Este es el segundo post de testeo de la pagina.", user_id: 2},
-  {title: "Tercer Post", content: "Este es el tercer post de la pagina. ", user_id: 1},
-  {title: "Post numero 4", content: "Este es otro post", user_id: 1},
-  {title: "Test 5 del foro", content: "Este es un post de testeo", user_id: 1},
-  {title: "Post con imagen", content: "Post imagen", user_id: 1},
-  {title: "Post 30", content: "![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)", user_id: 1},
-  {title: "Testeo de Up/Down", content: "Este post se usara para testear funcionalidad Up/Down", user_id: 2},
-  {title: "Paul", content: "Let's talk about McCartney", user_id: 2},
-  {title: "Bohemian Rhapsody", content: "Good song.\r\n\r\n![Image of Queen](http://e.radio-oxigeno.io/normal/2018/05/24/292129_615616.jpg)", user_id: 1}
+  {title: "Test Post", content: "This is a test post used for testing our forum. Edited. Edited.", user_id: 1, forum_id: 1},
+  {title: "Test Post 2", content: "Este es el segundo post de testeo de la pagina.", user_id: 2, forum_id: 1},
+  {title: "Tercer Post", content: "Este es el tercer post de la pagina. ", user_id: 1, forum_id: 1},
+  {title: "Post numero 4", content: "Este es otro post", user_id: 1, forum_id: 1},
+  {title: "Test 5 del foro", content: "Este es un post de testeo", user_id: 1, forum_id: 1},
+  {title: "Post con imagen", content: "Post imagen", user_id: 1, forum_id: 1},
+  {title: "Post 30", content: "![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)", user_id: 1, forum_id: 1},
+  {title: "Testeo de Up/Down", content: "Este post se usara para testear funcionalidad Up/Down", user_id: 2, forum_id: 1},
+  {title: "Paul", content: "Let's talk about McCartney", user_id: 2, forum_id: 6},
+  {title: "Bohemian Rhapsody", content: "Good song.\r\n\r\n![Image of Queen](http://e.radio-oxigeno.io/normal/2018/05/24/292129_615616.jpg)", user_id: 1, forum_id: 7}
 ])
 Comment.create!([
   {comment: "Comentario editado", post_id: 1, user_id: 1},
