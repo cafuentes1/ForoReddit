@@ -1,7 +1,7 @@
 
 User.create!([
-  {email: "cafuentes1@uc.cl", password: 123456, :password_confirmation: 123456, username: "cafuentes1"},
-  {email: "cafuentes2@uc.cl", password: 123456, :password_confirmation: 123456, username: "cafuentes2"}
+  {email: "cafuentes1@uc.cl", password: 123456, password_confirmation: 123456, username: "cafuentes1"},
+  {email: "cafuentes2@uc.cl", password: 123456, password_confirmation: 123456, username: "cafuentes2"}
 ])
 Forum.create!([
   {title: "General", topic: "Test", description: "Test Forum"},
