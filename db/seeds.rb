@@ -36,11 +36,6 @@ Comment.create!([
   {comment: "comments 2", post_id: 2, user_id: 2},
   {comment: "hi", post_id: 2, user_id: 2},
   {comment: "Comment 1", post_id: 10, user_id: 2},
-  {comment: "-1", post_id: 10, user_id: 2},
-  {comment: "-1", post_id: 10, user_id: 2},
-  {comment: "first", post_id: 11, user_id: 2},
-  {comment: "hola", post_id: 5, user_id: 2},
-  {comment: "hi", post_id: 11, user_id: 1}
 ])
 Role.create!([
   {name: "admin", resource_type: nil, resource_id: nil}
