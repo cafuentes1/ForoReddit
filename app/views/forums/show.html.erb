@@ -25,11 +25,13 @@
     <div class="level">
       <div class="level-left">
         <div class="buttons">
+          <% if user_signed_in? %>
           <% if !current_user.subscriptions.exists?(@forum.id) %>
             <%= link_to 'Seguir', subscribe_forum_path(@forum, type: "subscribe"), class:'button is-info', method: :put %>
           <% end %>
           <% if current_user.subscriptions.exists?(@forum.id) %>
             <%= link_to 'Dejar de seguir', subscribe_forum_path(@forum, type: "unsubscribe"), class:'button is-danger', method: :put %>
+          <% end %>
           <% end %>
         </div>
       </div>

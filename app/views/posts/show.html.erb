@@ -24,7 +24,8 @@
             </a>
             <a class="level-item"></a>
           <% end %>
-          <% if !current_user.favorites.exists?(@post.id) %>
+          <% if user_signed_in? %>
+          <% if !current_user.favorites.exists?(@post.id)%>
           <a class="level-item">
             <%= link_to favorite_post_path(@post, type: "favorite"), method: :put do %>
             <span class="icon is-small"><i class="fa fa-star-o fa_custom fa-2x"></i></span>
@@ -37,6 +38,7 @@
             <span class="icon is-small"><i class="fa fa-star fa_custom fa-2x"></i></span>
             <% end %>
           </a>
+          <% end %>
           <% end %>
         </div>
       </nav>
