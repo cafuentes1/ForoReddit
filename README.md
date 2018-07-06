@@ -14,7 +14,7 @@ Cualquier usuario puede leer los distintos foros, posts y comentarios. Tiene la 
 En la barra de navegación superior (Navbar) esta la opción Registrarse, la cual solicita al usuario la creación de username, mail y password. El mail debe ser valido y la contraseña debe contener 6 caracteres minimo. Si su mail está asociado con una cuenta Wordpress, su gravatar se mostrará como imagen de usuario.
 
 <h2> Iniciar Sesión </h2>
-En la Navbar está la opción Iniciar sesión. Un usuario registrado debe ingresar su usuario y contraseña.
+En la Navbar está la opción Iniciar sesión. Un usuario registrado debe ingresar su mail y contraseña.
 
 <h2> Usuario Normal </h2>
 Una vez iniciado sesión, un usuario tiene la opción de crear nuevos foros y posts, ademas de comentar posts ya existentes. Tiene la opción de editar y eliminar foros, posts y comentarios de su autoría. Tiene la opción de marcar un foro como favorito, y darle like o dislike a posts y comentarios que no sean de su autoría. Los likes y comentarios dados por otros usuarios a posts y comentarios de los cuales el usuario es autor sumaran a su reputación.
