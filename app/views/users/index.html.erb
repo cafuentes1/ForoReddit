@@ -12,8 +12,9 @@
     </div>
     <div class="column has-text-right">
       <nav class="level is-mobile">
-        <%= pluralize user.reputation_for(:rp).to_i, "punto" %>
-        <div class="level-right"><%= link_to 'Ver Perfil', user_path(user.id), class:'button'%></div>
+        <div class="level-right">
+          <%= link_to 'Ver Perfil', user_path(user.id), class:'button'%>
+        </div>
       </nav>
     </div>
   </div>
